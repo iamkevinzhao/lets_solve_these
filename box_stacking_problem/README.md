@@ -18,3 +18,4 @@ the maximum height after stacking is 8. A possible stacking scheme is shown as f
 
 As you can tell from the above scheme, no part of the upper box can be seen from the bottom of the box beneath. We can call such stacking as "perfect stacking". Here are some scenarios that boxes are not perfectly stacked.
 
+![](doc/imperfect_stackings.png)
