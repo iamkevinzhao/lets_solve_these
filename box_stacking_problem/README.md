@@ -63,7 +63,7 @@ Input Sample:
 - The number of the first row indicates the number of the total test case.
 - Then follows each test case. In each case, the number of the first line indicates the number of the box. 
 - Then follows the width, the length and the height of each box.
-- In above case, we have 4 test cases; for the first test case, there are 2 boxes; for the first box of the first case, the width, the length and the height is 43, 23, 45, accordingly.
+- In above case, we have 4 test cases; for the first test case, there are 2 boxes; for the first box of the first case, the width, the length and the height is 43, 23, 45, respectively.
 
 Output Sample:
 
