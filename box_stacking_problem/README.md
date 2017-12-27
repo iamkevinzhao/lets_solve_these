@@ -11,3 +11,5 @@
 For instance, given three boxes A, B, C,![](doc/three_boxes.png)
 
 the maximum height after stacking is 8. One possible stacking scheme is shown as follows.
+
+![](doc/stacking_three_boxes.png){width=50%}
