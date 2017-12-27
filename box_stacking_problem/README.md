@@ -60,8 +60,8 @@ Input Sample:
 
 **Description:**
 
-- The number of the first row indicates the number of the total test case.
-- Then follows each test case. In each case, the number of the first line indicates the number of the box. 
+- The number in the first row indicates the number of the total test case.
+- Then follows each test case. In each case, the number in the first line indicates the number of the box. 
 - Then follows the width, the length and the height of each box.
 - In above case, we have 4 test cases; for the first test case, there are 2 boxes; for the first box of the first case, the width, the length and the height is 43, 23, 45, respectively.
 
@@ -80,7 +80,7 @@ The result of each test case, namely the maximum height of stacking, is printed 
 
 **Note:**
 
-Above snippets are intend to illustrate the I/O format stipulation. The result shown in the "Output Sample" is not guaranteed correct.
+Above snippets are only intend to illustrate the I/O format stipulation. The result shown in the "Output Sample" is not guaranteed correct.
 
 #### Restrictions
 
