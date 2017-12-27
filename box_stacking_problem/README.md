@@ -85,4 +85,4 @@ Above snippets are intend to illustrate the I/O format stipulation. The result s
 #### Restrictions
 
 - No libraries are allowed to be included by the program, except for `<iostream>` and `<fstream>`.
-- Total running time of the program should be less than 5 seconds for 50 arbitrary cases.
+- Total running time of the program should be less than 5 seconds for 50 arbitrary test cases.
