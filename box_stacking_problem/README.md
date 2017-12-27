@@ -76,11 +76,11 @@ Output Sample:
 
 **Description:**
 
-The result of each test case, namely the maximum height of stacking, is printed after the `#test id` .
+The result of each test case, namely the maximum height of stacking, is printed after the `#case-id` .
 
 **Note:**
 
-Above snippets are only intend to illustrate the I/O format stipulation. The result shown in the "Output Sample" is not guaranteed correct.
+Above snippets only intend to illustrate the I/O format stipulation. The result shown in the "Output Sample" is not guaranteed correct.
 
 #### Restrictions
 
