@@ -2,7 +2,7 @@
 
 #### Description
 
-- Given N cubic boxes, stack them in order to acquire the maximal height.
+- Given N (1 <= N <= 20) cubic boxes, stack them in order to acquire the maximal height.
 - While stacking, an box should be perfectly stacked on the other. The term "perfect" will be explained in the following context.
 - The width, length and height of these boxes are all integer numbers within [1, 10000].
 - Boxes can be rotated.
