@@ -9,8 +9,11 @@ public:
 	vector() : array_(NULL), size_(0) {}
 	vector(const vector& obj) : array_(NULL), size_(0) {
 		size_ = obj.size_;
+		if (size_ <= 0) {
+			return;
+		}
 		array_ = new Element[size_];
-		for (int i = 0; i < obj.size_; ++i) {
+		for (int i = 0; i < size_; ++i) {
 			array_[i] = obj.array_[i];
 		}
 	}
@@ -18,26 +21,28 @@ public:
 		clear();
 	}
 	vector& operator=(const vector& obj) {
-		clone(obj);
+		clear();
+		size_ = obj.size_;
+		if (size_ <= 0) {
+			return *this;
+		}
+		array_ = new Element[size_];
+		for (int i = 0; i < size_; ++i) {
+			array_[i] = obj.array_[i];
+		}
 		return *this;
 	}
-	void insert(const Element& ele, const int& at) {
+	void push_back(const Element& ele) {
 		Element* new_array = new Element[size_ + 1];
-		for (int i = 0; i < at; ++i) {
+		for (int i = 0; i < size_; ++i) {
 			new_array[i] = array_[i];
 		}
-		new_array[at] = ele;
-		for (int i = at; i < size_; ++i) {
-			new_array[i + 1] = array_[i];
-		}
+		new_array[size_] = ele;
 		if (array_) {
 			delete[] array_;
 		}
 		array_ = new_array;
 		++size_;
-	}
-	void push_back(const Element& ele) {
-		insert(ele, size_);
 	}
 	Element& operator[](const int& at) {
 		return array_[at];
@@ -52,26 +57,18 @@ public:
 		return size_ <= 0;
 	}
 	void clear() {
+		size_ = 0;
 		if (array_) {
 			delete[] array_;
-		}
-		array_ = NULL;
-		size_ = 0;
-	}
-	void clone(const vector& obj) {
-		clear();
-		size_ = obj.size_;
-		array_ = new Element[size_];
-		for (int i = 0; i < size_; ++i) {
-			array_[i] = obj.array_[i];
+			array_ = NULL;
 		}
 	}
 private:
-	int size_;
 	Element* array_;
+	int size_;
 };
 
-/////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////
 
 struct Box {
 	Box(const int& x, const int& y, const int& z, const int& i) : id(i) {
@@ -99,30 +96,29 @@ struct Box {
 		swap(sides[0], sides[2]);
 	}
 	bool CanBeAbove(const Box& box) {
-		if (sides[1] >= box.sides[1] && sides[2] >= box.sides[2]) {
+		if ((sides[1] >= box.sides[1]) && (sides[2] >= box.sides[2])) {
 			return true;
 		}
-		if (sides[2] >= box.sides[1] && sides[1] >= box.sides[2]) {
+		if ((sides[1] >= box.sides[2]) && (sides[2] >= box.sides[1])) {
 			return true;
 		}
 		return false;
 	}
-	int id;
 	vector<int> sides;
+	int id;
 };
 
-////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
 struct Node {
 	Node() : ref_height(0), visited(false) {}
-	Box* box;
 	int ref_height;
-	vector<Node*> aboves;
 	bool visited;
+	vector<Node*> aboves;
+	Box* box;
 };
 
-////////////////////////////////////////////////////////////////////
-
-void FillAboves(vector<Node>& nodes) {
+void FindAboves(vector<Node>& nodes) {
 	for (int i = 0; i < nodes.size(); ++i) {
 		for (int j = 0; j < nodes.size(); ++j) {
 			if (nodes[i].box->id == nodes[j].box->id) {
@@ -134,8 +130,6 @@ void FillAboves(vector<Node>& nodes) {
 		}
 	}
 }
-
-////////////////////////////////////////////////////////////////////
 
 void CalcRefHeight(Node& node) {
 	if (node.visited) {
@@ -155,10 +149,11 @@ void CalcRefHeight(Node& node) {
 			max_ref_height = node.aboves[i]->ref_height;
 		}
 	}
-	node.ref_height = max_ref_height + node.box->sides[0];
+	node.ref_height = node.box->sides[0] + max_ref_height;
 }
 
-///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
 struct Path {
 	Path() : height(0) {}
 	vector<Node*> nodes;
@@ -166,7 +161,7 @@ struct Path {
 };
 
 void UpdateMaxHeight(Node& node, const Path& path, int& max_height) {
-	if ((path.height + node.ref_height) <= max_height) {
+	if ((node.ref_height + path.height) < max_height) {
 		return;
 	}
 	for (int i = 0; i < path.nodes.size(); ++i) {
@@ -192,17 +187,17 @@ void UpdateMaxHeight(Node& node, const Path& path, int& max_height) {
 	}
 }
 
-//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 int main() {
 	ifstream is("C:/Users/codincodee/Desktop/data.txt");
-	int case_total;
-	is >> case_total;
-	for (int case_id = 1; case_id <= case_total; ++case_id) {
-		int box_total;
-		is >> box_total;
+	int total_case;
+	is >> total_case;
+	for (int case_id = 1; case_id <= total_case; ++case_id) {
+		int total_box;
+		is >> total_box;
 		vector<Node> nodes;
-		for (int box_id = 0; box_id < box_total; ++box_id) {
+		for (int box_id = 0; box_id < total_box; ++box_id) {
 			int x, y, z;
 			is >> x;
 			is >> y;
@@ -218,7 +213,7 @@ int main() {
 			node.box->ChooseS();
 			nodes.push_back(node);
 		}
-		FillAboves(nodes);
+		FindAboves(nodes);
 		for (int i = 0; i < nodes.size(); ++i) {
 			CalcRefHeight(nodes[i]);
 		}
