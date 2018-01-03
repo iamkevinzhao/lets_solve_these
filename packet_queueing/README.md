@@ -78,4 +78,4 @@ Descriptions:
 #### Restrictions
 
 - Total running time of your program should be less than 5 seconds for maximal 50 arbitrary test cases.
-- No libraries should be used by your program except for <iostream> and <fstream>.
+- No libraries should be used by your program except for `<iostream>` and `<fstream>`.
