@@ -62,6 +62,7 @@ Descriptions:
 - The total number of the incoming packets is within [1, 1000].
 - The arrival time point of a packet is within [0, 5000].
 - The length of a packet is within [1, 10].
+- Packets are listed in a time-sequential order.
 
 Output Formats
 
